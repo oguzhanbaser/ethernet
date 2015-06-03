@@ -1,3 +1,6 @@
+//A Led attach digital-4 pin
+//Other SPI connections are same
+
 
 #include <EtherCard.h>
 
