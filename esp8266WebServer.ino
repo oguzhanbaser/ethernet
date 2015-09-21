@@ -91,7 +91,7 @@ void homepage(int ch_id) {
   //Header += "Refresh: 5\r\n";
 
   String Content;     //Sayfamızın içeriği
-  Content = "<center><h1>Hello World!</h1></center><hr><center><h2>Sadoooo</h2></center><hr>Led State: D";
+  Content = "<center><h1>Hello World!</h1></center><hr><center><h2>Oğuzhan Başer</h2></center><hr>Led State: D";
   Content += String(ledState);
   Content += "<br><a href=\"/?led\"><input type=\"button\" value=\"Led Durum\"></a>";
 
