@@ -1,6 +1,6 @@
 
-#define SSID "TTNET_AirTies_Air5650_4AY8"
-#define PASS "YF6bfaK2p6"
+#define SSID "YOUR WIFI NETWORK NAME"
+#define PASS "YOUR WIFI NETWOTK PASS"
 
 const int ledPin =  13;
 
