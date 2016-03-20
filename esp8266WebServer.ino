@@ -7,6 +7,8 @@ const int ledPin =  13;
 #define BUFFER_SIZE 128     //Tampon boyutunu belirler
 char buffer[BUFFER_SIZE];   //Tamponu oluşturduk
 int ledState = LOW;
+int led = 14;
+char a = 'sadasda';
 
 
 void setup() {
@@ -130,7 +132,7 @@ String sendData(String command, const int timeout, boolean debug)
 
   while ( (time + timeout) > millis())
   {
-    while (Serial3.available())   
+    while (Serial3.available())
     {
 
       // The esp has data so display its output to the serial window
