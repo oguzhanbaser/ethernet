@@ -8,6 +8,10 @@ const int ledPin =  13;
 char buffer[BUFFER_SIZE];   //Tamponu oluşturduk
 int ledState = LOW;
 
+asdasd
+asd
+asdad
+
 
 void setup() {
   // put your setup code here, to run once:
