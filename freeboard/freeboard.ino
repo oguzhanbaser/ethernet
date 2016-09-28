@@ -8,29 +8,28 @@
 #define WLAN_PASS "PASS"          //WiFi Password
 #define WLAN_SECURITY   WLAN_SEC_WPA2
 
-#define DHTPIN 7
+#define DHTPIN 7                //dht11 ayarları
 #define DHTTYPE DHT11
 
 #define HOST_NAME   "www.dweet.io"
-#define HOST_PORT   (3000)
+#define HOST_PORT   (80)
 
 #define thing_name  "thingName"   //cihaza verdiğiniz nesnenin ismi
 
 #define ONBOARDLED 13
 
-SoftwareSerial espSerial(2, 3);
-ESP8266 wifi(espSerial);
-DHT dht(DHTPIN, DHTTYPE);
+SoftwareSerial espSerial(2, 3);   //esp8266 
+ESP8266 wifi(espSerial);        
+DHT dht(DHTPIN, DHTTYPE);          //dht11
 
 unsigned long lastTime = 0, lastTime2 = 0;
 String sendData = "", valueStr = "";
-uint32_t ip;
 
 void setup(void)
 {
-  espSerial.begin(38400);
-  Serial.begin(38400);
-  Serial.print("setup begin\r\n");
+  espSerial.begin(38400);               //esp8266 haberleşmesini başlattık
+  Serial.begin(38400);                  //seri port haberleşmesini başlattık
+  Serial.print("setup begin\r\n");  
 
   pinMode(ONBOARDLED, OUTPUT);
 
@@ -44,6 +43,7 @@ void setup(void)
     while (1);
   }
 
+  //wifi bağlantısı yaptık
   if (wifi.joinAP(WLAN_SSID, WLAN_PASS)) {
     Serial.print("Join AP success\r\n");
     Serial.print("IP:");
@@ -63,15 +63,6 @@ void setup(void)
   }
 
   Serial.print("setup end\r\n");
-
-  Serial.println("Connecting dweet.io..");
-  if (wifi.createTCP(HOST_NAME, 80))
-  {
-    Serial.println("connect OK");
-  } else {
-    Serial.println("connecting failure!");
-    while (1);
-  }
 }
 
 void loop(void)
@@ -99,7 +90,7 @@ void loop(void)
   if (millis() - lastTime2 > 10000)
   {
     Serial.println("Connecting dweet.io..");
-    if (wifi.createTCP(HOST_NAME, 80))
+    if (wifi.createTCP(HOST_NAME, HOST_PORT))
     {
       Serial.println("connect OK");
     } else {
