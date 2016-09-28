@@ -77,9 +77,10 @@ void setup(void)
 void loop(void)
 {
 
+  //DHT11 verilerini 2 sn de bir okuduk
   if (millis() - lastTime > 2000)
   {
-    digitalWrite(ONBOARDLED, HIGH);
+    digitalWrite(ONBOARDLED, HIGH);   //okuma işlemi başladı
     float h = dht.readHumidity();
     float t = dht.readTemperature();
 
@@ -87,12 +88,14 @@ void loop(void)
       Serial.println("Failed to read from DHT sensor!");
     }
     else {
+      //sensörden alınan değerleri gönderilecek string e ekledik
       valueStr = "?tempature=" + String(t) + "&humidty=" + String(h);
     }
     lastTime = millis();
-    digitalWrite(ONBOARDLED, LOW);
+    digitalWrite(ONBOARDLED, LOW);    //okuma işlemi bitti
   }
 
+  //her 10 sn de bir dweet.io ya tcp soket ile bağlandık
   if (millis() - lastTime2 > 10000)
   {
     Serial.println("Connecting dweet.io..");
@@ -104,14 +107,18 @@ void loop(void)
       while (1);
     }
 
+    char sendArray[128];
+
+    //içeriği oluşturduk
     String content = " HTTP/1.1\r\nHost: dweet.io\r\nConnection: close\r\n\r\n";
 
-    char sendArray[128];
+    //http get metodunu oluştrduk.
+    //content ile birleştirip tcp server' a göndereeğiz
     sendData = "GET /dweet/for/" + String(thing_name) + valueStr + content;
-    sendData.toCharArray(sendArray, 128);
-    Serial.println(sendData);
+    sendData.toCharArray(sendArray, 128);         //string veriyi karakter dizisine çevirdik
+    Serial.println(sendData);                     //gönderilen veriyi gördük
 
-    wifi.send((const uint8_t*)sendArray, strlen(sendArray));
+    wifi.send((const uint8_t*)sendArray, strlen(sendArray));    //tcp server a gönder
 
     uint8_t myBuffer[128] = { 0 };
     uint32_t len = wifi.recv(myBuffer, sizeof(myBuffer), 10000);
