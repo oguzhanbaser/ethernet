@@ -1,13 +1,16 @@
+//gerekli kütüphaneler
 var express= require('express');
 var app = express();
 var http = require('http').Server(app);
-var net = require('net');
-var localIP = "";
+var net = require('net');			//TCP soketi oluşturan kütüphane
+var localIP = "";					//Local IP' inizi buraya giriniz!!!!!!!!!!!
 
+//TCP server' i oluştur
 var server = net.createServer(function(socket){
 
 }).listen(3000, localIP);
 
+//TCP server' a biri bağlantığı zaman uyan
 server.on('connection', function(socket){
 	console.log("Biri baglandi");
 
@@ -15,6 +18,7 @@ server.on('connection', function(socket){
 		console.log("%s", data);
 	});
 
+	//sokete biri bağlanmışssa 1 sn aralıklar ile RGB led değerlerini gönder
 	setInterval(function(){
 
 		var x1 = Math.floor((Math.random() * 254) + 1);
