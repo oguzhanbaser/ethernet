@@ -6,8 +6,8 @@
 #include <ESP8266HTTPUpdateServer.h>
 
 #ifndef STASSID
-#define STASSID "SUPERONLINE_WiFi_7938"
-#define STAPSK  "47VF4PXKJKFX"
+#define STASSID "wifi-ssid"
+#define STAPSK  "wifi-pass"
 #endif
 
 const char* ssid = STASSID;
